@@ -53,8 +53,11 @@ This script annotates each of the generated clusters using data collected from t
 The script takes as an input the phashes file (default is `phashes.txt`, you can change using the option `--phashes`) and the clustering output (default is `clustering_output.txt`, you can change using the option `--clustering`), and it outputs a json file in the format of `"cluster_no-kym_image"`: `"hamming distance"`. 
 This will includes all the KYM images that have a hamming distance of less or equal of 8 with a cluster medoid. To change the default distance using the option `--distance`.
 
+## Dataset
+The dataset used for the paper below is available at https://zenodo.org/record/1451841#.W7u2txNKj_R. The dataset contains all the image URLs and pHashes for all the images that were posted on Reddit, Twitter (1% Streaming API), 4chan's Politically Incorrect (/pol/) board, and Gab.
+
 ## Reference
-If you use or find this source code useful please cite the following work:
+If you use or find this source code or dataset useful please cite the following work:
 
     @inproceedings{zannettou2018origins,
     author = {Zannettou, Savvas and Caulfield, Tristan and Blackburn, Jeremy and De Cristofaro, Emiliano and Sirivianos, Michael and Stringhini, Gianluca and Suarez-Tangil, Guillermo},
@@ -68,4 +71,3 @@ If you use or find this source code useful please cite the following work:
 
 * This project has received funding from the European Union’s Horizon 2020 Research and Innovation program under the Marie Skłodowska-Curie ENCASE project (Grant Agreement No. 691025).
 * We also gratefully acknowledge the support of the NVIDIA Corporation for the donation of the Titan Xp GPUs used for our experiments.
-

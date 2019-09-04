@@ -279,7 +279,7 @@ def seek_queue_many(ids, hashes, outdir, blacklist, hashes_diff):
 
     last_index = 0
     num_threads = 5
-    batch_size = 1#int(len_hashes/num_threads)
+    batch_size = int(len_hashes/num_threads)
     total_tasks = len_hashes - len(blacklist)
     print(batch_size)
     print(total_tasks)
