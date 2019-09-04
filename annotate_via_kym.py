@@ -181,7 +181,6 @@ def check_batch_many(sess, hashes, enqueue_op, init_i, batch_size, queue_i, queu
     Can't use /gpu:1 -- https://github.com/tensorflow/tensorflow/issues/9506
 '''
 def seek_queue_many(ids_i, ids_j, hashes_i, hashes_j, outdir, blacklist, hashes_diff):
-    print(DISTANCE_THRESHOLD)
     len_hashes = len(hashes_i)
 
     last_index = 0
