@@ -181,7 +181,7 @@ def check_batch_many(sess, hashes, enqueue_op, init_i, batch_size, queue_i, queu
     Can't use /gpu:1 -- https://github.com/tensorflow/tensorflow/issues/9506
 '''
 def seek_queue_many(ids_i, ids_j, hashes_i, hashes_j, outdir, blacklist, hashes_diff):
-
+    print(DISTANCE_THRESHOLD)
     len_hashes = len(hashes_i)
 
     last_index = 0
@@ -276,13 +276,14 @@ def main(options, arguments):
     if options.distance == None:
         distance = 8
     else: 
-        distance = options.distance
-
+        distance = int(options.distance)
+    global DISTANCE_THRESHOLD 
+    DISTANCE_THRESHOLD = distance
     phases_path = options.phashes
 
     clusters_file = options.clustering
-    if distance != 8:
-        clusters_file = clusters_file.replace('.txt', '_' + str(distance) + '.txt')
+    #if distance != 8:
+    #    clusters_file = clusters_file.replace('.txt', '_' + str(distance) + '.txt')
         
     kym_phashes_file = "kym_phashes_classes.txt"
     outfile = options.output
