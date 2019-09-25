@@ -45,11 +45,42 @@ if test:
     CLUSTERING_MIN_SAMPLES=3
 data = json.load(open(distances_file, 'r'))
 
+def load_phashes(fil):
+    phash_dict = {}
+    with open(fil) as f:
+        for line in f:
+            el = line.replace('\n','').split('\t')
+            image = el[0]
+            phash = el[1]
+            phash_dict[image] = phash
+    return phash_dict
+
+phashes_dict = load_phashes(phashes)
+
+
+def extract_pairs(pair_text, phashes_dict):
+    pairs = []
+    els = pair_text.split('-')
+    if len(els)>2:
+        for i in range(len(els)):
+            pair = '-'.join(els[0:i])
+            # check if we found first pair
+            if pair in phashes_dict:
+                pairs.append(pair)
+                break
+        pair2 = '-'.join(els[i:])
+        if pair2 in phashes_dict:
+            pairs.append(pair2)
+    else:
+        return els
+    return pairs
+
 # find all pairs and all images from the dict
 all_pairs = data.keys()
 all_images = []
 for pair in all_pairs:
-    all_images.extend(pair.split('-'))
+    all_images.extend(extract_pairs(pair, phashes_dict))
+
 all_images = set(all_images)
 
 # create a dict that will provide us with the mapping between the image and the
@@ -68,8 +99,7 @@ n = len(all_images)
 distance_matrix = lil_matrix((n, n))
 
 for pair in all_pairs:
-    image1 = pair.split('-')[0]
-    image2 = pair.split('-')[-1]
+    image1, image2 = extract_pairs(pair, phashes_dict)
     distance = data[pair]
     if distance == 0:
         distance = 0.00000000000001
@@ -112,17 +142,7 @@ clustering = DBSCAN(eps=CLUSTERING_THRESHOLD, metric='precomputed', n_jobs=8, mi
 num_clusters = len(dict(Counter(clustering.labels_)).keys())
 print("Number of clusters  = %d " %(num_clusters-1))
 
-def load_phashes(fil):
-    phash_dict = {}
-    with open(fil) as f:
-        for line in f:
-            el = line.replace('\n','').split('\t')
-            image = el[0]
-            phash = el[1]
-            phash_dict[image] = phash
-    return phash_dict
 
-phashes_dict = load_phashes(phashes)
 
 def find_cluster_medroid_phash(cl_output, cluster_num, phash_dict, distance_matr, index_im_dict):
     # get indices of images in cluster
