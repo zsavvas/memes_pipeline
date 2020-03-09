@@ -54,7 +54,7 @@ The script takes as an input the phashes file (default is `phashes.txt`, you can
 This will includes all the KYM images that have a hamming distance of less or equal of 8 with a cluster medoid. To change the default distance using the option `--distance`.
 
 ## Dataset
-The dataset used for the paper below is available at https://zenodo.org/record/1451841#.W7u2txNKj_R. The dataset contains all the image URLs and pHashes for all the images that were posted on Reddit, Twitter (1% Streaming API), 4chan's Politically Incorrect (/pol/) board, and Gab.
+The dataset used for the paper below is available at https://zenodo.org/record/3699670#.XmZgkZNKi3A. The dataset contains all the image URLs and pHashes for all the images that were posted on Reddit, Twitter (1% Streaming API), 4chan's Politically Incorrect (/pol/) board, and Gab.
 
 ## Reference
 If you use or find this source code or dataset useful please cite the following work:
